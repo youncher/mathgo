@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "59844646137",
+    "firebase_url": "https://mathgo-46d6d.firebaseio.com",
+    "project_id": "mathgo-46d6d",
+    "storage_bucket": "mathgo-46d6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59844646137:android:3f4845e8c425e7ec903e28",
+        "android_client_info": {
+          "package_name": "com.TeamMathGo.MathGo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59844646137-cahsdl6ssr3kr0dtp312r1mlhh7r2phf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApxmJLaM9UccbLCjOz3DXwzSWkWQva7D8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59844646137-cahsdl6ssr3kr0dtp312r1mlhh7r2phf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
