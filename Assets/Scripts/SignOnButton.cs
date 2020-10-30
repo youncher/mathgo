@@ -27,6 +27,8 @@ public class SignOnButton : MonoBehaviour
 
     public void ChangeToNewCharacterScreen()
     {
+        UIManager.Instance.TogglePlayerSelectCharacters(true);
+
         SignOnCanvas.enabled = false;
         NewCharacterCanvas.enabled = true;
     }
