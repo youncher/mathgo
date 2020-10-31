@@ -6,10 +6,13 @@ using Google;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
-  
 public class SignOnButton : MonoBehaviour
 {
+    [SerializeField] private GameObject loader;
+
+
     public Canvas SignOnCanvas;
     public Canvas NewCharacterCanvas;
 
@@ -88,10 +91,14 @@ public class SignOnButton : MonoBehaviour
         
         if (userInfo.existingUser)
         {
-          AddStatusText("Existing user: " + userInfo.displayName);
-          // TODO: Change to map view
-        }
-        else
+          //AddStatusText("Existing user: " + userInfo.displayName);
+
+          // Loading up user data into game manager, and loading new scene
+          loader.GetComponent<GameManager>().charType = userInfo.avatar;
+          SceneManager.LoadScene(1);
+
+            }
+            else
         {
           AddStatusText("New Math Go user!");
           ChangeToNewCharacterScreen();
