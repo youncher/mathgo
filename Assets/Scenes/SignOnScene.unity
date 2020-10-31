@@ -1628,7 +1628,7 @@ GameObject:
   - component: {fileID: 1659325409}
   - component: {fileID: 1659325408}
   m_Layer: 5
-  m_Name: DebugSinOnStatusText
+  m_Name: DebugSignOnStatusText
   m_TagString: DebugSignOnStatusText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
