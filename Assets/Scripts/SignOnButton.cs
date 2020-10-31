@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +12,12 @@ public class SignOnButton : MonoBehaviour
 {
     public Canvas SignOnCanvas;
     public Canvas NewCharacterCanvas;
-    
-    public Text statusText;
+
+    private Text debugSignOnStatusText;
     private string webClientId = Keys.GetWebClientId();
     private GoogleSignInConfiguration configuration;
     private UserInfo userInfo;
     
-    // Defer the configuration creation until Awake so the web Client ID
-    // Can be set via the property inspector in the Editor.
     void Awake() {
       configuration = new GoogleSignInConfiguration {
             WebClientId = webClientId,
@@ -28,12 +25,11 @@ public class SignOnButton : MonoBehaviour
       };
     }
 
-    public void ChangeToNewCharacterScreen()
+    void Start()
     {
-      SignOnCanvas.enabled = false;
-      NewCharacterCanvas.enabled = true;
+      debugSignOnStatusText = GameObject.Find("DebugSignOnStatusText").GetComponent<Text>();
     }
-    
+
     public void OnSignIn() {
       GoogleSignIn.Configuration = configuration;
       GoogleSignIn.Configuration.UseGameSignIn = false;
@@ -103,6 +99,12 @@ public class SignOnButton : MonoBehaviour
       }
     }
     
+    public void ChangeToNewCharacterScreen()
+    {
+      SignOnCanvas.enabled = false;
+      NewCharacterCanvas.enabled = true;
+    }
+    
     private List<string> messages = new List<string>();
     void AddStatusText(string text) {
       if (messages.Count == 5) {
@@ -113,6 +115,6 @@ public class SignOnButton : MonoBehaviour
       foreach (string s in messages) {
         txt += "\n" + s;
       }
-      statusText.text = txt;
+      debugSignOnStatusText.text = txt;
     }
 }

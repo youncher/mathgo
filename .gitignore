@@ -71,4 +71,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Other
-Keys.cs
+/Assets/Scripts/Keys.cs
