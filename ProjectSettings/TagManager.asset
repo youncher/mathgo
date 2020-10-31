@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SignOnCanvas
   - NewCharacterCanvas
+  - DebugSignOnStatusText
   layers:
   - Default
   - TransparentFX
