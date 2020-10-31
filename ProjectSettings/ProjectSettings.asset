@@ -125,8 +125,7 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1
-  preloadedAssets:
-  - {fileID: 2173393599685444091, guid: bf744303c7c925d4f865e69436dd8a7f, type: 2}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -247,8 +246,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Cherie/Documents/Unity Stuff/Unity3D/math-go/Keys
-    (private)/user.keystore
+  AndroidKeystoreName: '{dedicated}: Desktop/user.keystore'
   AndroidKeyaliasName: mathgo
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

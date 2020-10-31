@@ -1,6 +1,6 @@
 ﻿public class Keys
 {
-    private static string webClientId = "59844646137-gqq5501vq1d11t1gv9dn6tn7k1her1as.apps.googleusercontent.com";
+    private static string webClientId = "put_key_here";
 
     public static string GetWebClientId()
     {
