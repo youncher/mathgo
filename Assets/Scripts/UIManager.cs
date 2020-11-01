@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+#if PLATFORM_ANDROID
+using UnityEngine.Android;
+#endif
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private GameObject loader;
+
+    GameObject dialog = null;
+
     public Canvas signOnCanvas;
     public Canvas newCharacterCanvas;
     public Button confirmButton;
@@ -36,6 +45,16 @@ public class UIManager : MonoBehaviour
         // Couldnt find a way in Unity UI to set the enable/disable - can remove if someoone else finds it
         signOnCanvas.enabled = true;
         newCharacterCanvas.enabled = false;
+
+
+        // Request permission for location services
+        #if PLATFORM_ANDROID
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
+            dialog = new GameObject();
+        }
+        #endif
     }
 
     // Update is called once per frame
@@ -71,5 +90,7 @@ public class UIManager : MonoBehaviour
     {
         // TODO: Save Character selection and name, transition to map view
         Debug.Log(string.Format("REGISTRATION: Character Name: {0}, Character Type: {1}", characterName, characterType));
+        loader.GetComponent<GameManager>().charType = characterType;
+        SceneManager.LoadScene(1);
     }
 }
