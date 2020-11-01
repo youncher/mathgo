@@ -1205,8 +1205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5189de8257ee14d9c74f8a5295990a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character1: {fileID: 175374, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
-  character2: {fileID: 106736, guid: 46398a79a336cba4c9c8998b2bff56c2, type: 3}
+  character1: {fileID: 204611119919222813, guid: 79dde9f8fd55ffb46af2864608e83c89,
+    type: 3}
+  character2: {fileID: 3287661613510392533, guid: 1a787478c7654f54ca7e5005a0c6c433,
+    type: 3}
 --- !u!4 &1990140692
 Transform:
   m_ObjectHideFlags: 0
