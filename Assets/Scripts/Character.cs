@@ -5,20 +5,13 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public int characterType;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject SpotLight;
 
     private void OnMouseDown()
     {
+        Vector3 spotLightPosition = new Vector3(this.transform.position.x, 10, this.transform.position.z);
+        SpotLight.transform.position = spotLightPosition;
         UIManager.Instance.UpdateCharacterTypeSelected(characterType);
     }
 }

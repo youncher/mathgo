@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     public Canvas signOnCanvas;
     public Canvas newCharacterCanvas;
     public Button confirmButton;
+    [SerializeField]
+    private GameObject[] characters;
     private int characterType = -1;
     private string characterName = "";
 
@@ -42,6 +44,8 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TogglePlayerSelectCharacters(false);
+
         // Couldnt find a way in Unity UI to set the enable/disable - can remove if someoone else finds it
         signOnCanvas.enabled = true;
         newCharacterCanvas.enabled = false;
@@ -92,5 +96,13 @@ public class UIManager : MonoBehaviour
         Debug.Log(string.Format("REGISTRATION: Character Name: {0}, Character Type: {1}", characterName, characterType));
         loader.GetComponent<GameManager>().charType = characterType;
         SceneManager.LoadScene(1);
+    }
+
+    public void TogglePlayerSelectCharacters(bool flag)
+    {
+        foreach (var character in characters)
+        {
+            character.SetActive(flag);
+        }
     }
 }
