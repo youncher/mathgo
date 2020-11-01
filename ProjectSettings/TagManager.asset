@@ -7,6 +7,7 @@ TagManager:
   - SignOnCanvas
   - NewCharacterCanvas
   - PlayerSelectCharacters
+  - DebugSignOnStatusText
   layers:
   - Default
   - TransparentFX
