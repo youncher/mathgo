@@ -1110,9 +1110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e9bc27f8e65144d9792ffeaaca0788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loader: {fileID: 1543341581}
   signOnCanvas: {fileID: 1570164083}
   newCharacterCanvas: {fileID: 1081296441}
-  confirmButton: {fileID: 0}
+  confirmButton: {fileID: 1822573882}
   characters:
   - {fileID: 611079061}
   - {fileID: 16901351}
@@ -2119,6 +2120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479d2dddefb8ad3439f0e6bb5cf2784d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loader: {fileID: 1543341581}
   SignOnCanvas: {fileID: 1570164083}
   NewCharacterCanvas: {fileID: 1081296441}
 --- !u!1 &1659325406
