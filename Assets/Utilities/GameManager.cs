@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public int charType;
+    public int beastiesSpawned = 5;
 
     private void Awake()
     {
