@@ -67,7 +67,7 @@ public class OverworldManager : MonoBehaviour
     {
         // Reference: https://www.youtube.com/watch?v=S827tTi8OCo&list=PL86WBCjNmqh4bDQycScKKlP0ETkjo39gG
         float randomNum = UnityEngine.Random.Range(MIN_RANGE, MAX_RANGE);
-        int direction = UnityEngine.Random.Range(0, 1) == 0 ? 1 : -1;
+        int direction = UnityEngine.Random.Range(0, 2) == 0 ? 1 : -1;
         return randomNum * direction;
     }
 }
