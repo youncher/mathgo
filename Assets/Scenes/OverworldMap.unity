@@ -1186,6 +1186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1990140692}
   - component: {fileID: 1990140691}
+  - component: {fileID: 1990140693}
   m_Layer: 0
   m_Name: OverworldMapSceneManager
   m_TagString: Untagged
@@ -1223,3 +1224,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1990140693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990140690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c686ec93d204850997d19d7f952e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beasties:
+  - {fileID: 2650609646402557755, guid: b274f055acd44484e979267107f9a3c4, type: 3}
+  - {fileID: -1366305014556393339, guid: f657c58adb4c219419ae056411d88e27, type: 3}
+  - {fileID: -2697438326805433071, guid: b1a8c14b418e2834da1019654399e0e0, type: 3}
+  - {fileID: -495711479156691775, guid: fe9bab289d42f0244859df1b1359454b, type: 3}
+  - {fileID: -7656248496681298073, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
+  - {fileID: -7851039578390058696, guid: 46398a79a336cba4c9c8998b2bff56c2, type: 3}

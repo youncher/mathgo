@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CN2124PTV",
         "name": "com.TeamMathGo.MathGo",
-        "processId": 25971,
+        "processId": 8240,
         "exited": true
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,42 @@
             "deviceId": "R5CN2124PTV",
             "name": "com.TeamMathGo.MathGo",
             "processId": 25971,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CN2124PTV",
+            "name": "com.TeamMathGo.MathGo",
+            "processId": 6724,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CN2124PTV",
+            "name": "com.TeamMathGo.MathGo",
+            "processId": 8819,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CN2124PTV",
+            "name": "com.TeamMathGo.MathGo",
+            "processId": 6445,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CN2124PTV",
+            "name": "com.TeamMathGo.MathGo",
+            "processId": 1666,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CN2124PTV",
+            "name": "com.TeamMathGo.MathGo",
+            "processId": 5730,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CN2124PTV",
+            "name": "com.TeamMathGo.MathGo",
+            "processId": 8240,
             "exited": true
         }
     ],
