@@ -86,6 +86,7 @@ public class SignOnButton : MonoBehaviour {
       UserInfo responseUserInfo = JsonUtility.FromJson<UserInfo> (response);
       userInfo.avatar = responseUserInfo.avatar;
       userInfo.existingUser = responseUserInfo.existingUser;
+      userInfo.loginSuccessful = responseUserInfo.loginSuccessful;
 
       if (!userInfo.loginSuccessful)
       {
