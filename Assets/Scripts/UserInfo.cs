@@ -7,4 +7,6 @@ public class UserInfo
     public bool existingUser;
     public int avatar;
     public string displayName;
+    public string idToken;
+    public bool loginSuccessful;
 }

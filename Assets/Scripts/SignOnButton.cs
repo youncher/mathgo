@@ -55,7 +55,12 @@ public class SignOnButton : MonoBehaviour {
     } else if (task.IsCanceled) {
       AddStatusText ("Canceled");
     } else { // Google auth success
-      userInfo = new UserInfo { gid = task.Result.UserId, displayName = task.Result.DisplayName };
+      userInfo = new UserInfo
+      {
+        gid = task.Result.UserId,
+        displayName = task.Result.DisplayName,
+        idToken = task.Result.IdToken
+      };
 
       // Send user info to check if existing mathgo user
       StartCoroutine (CheckUserExists ());
@@ -81,10 +86,15 @@ public class SignOnButton : MonoBehaviour {
       UserInfo responseUserInfo = JsonUtility.FromJson<UserInfo> (response);
       userInfo.avatar = responseUserInfo.avatar;
       userInfo.existingUser = responseUserInfo.existingUser;
+      userInfo.loginSuccessful = responseUserInfo.loginSuccessful;
 
-      if (userInfo.existingUser) {
-        //AddStatusText("Existing user: " + userInfo.displayName);
-
+      if (!userInfo.loginSuccessful)
+      {
+        // TODO Handle unsuccessful login
+        Debug.Log ("Invalid login");
+        AddStatusText ("Login unsuccessful");
+      }
+      else if (userInfo.existingUser) {
         // Loading up user data into game manager, and loading new scene
         loader.GetComponent<GameManager> ().charType = userInfo.avatar;
         SceneManager.LoadScene (1);
