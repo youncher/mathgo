@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+using System.Text;
 
 #if PLATFORM_ANDROID
 using UnityEngine.Android;
@@ -92,11 +94,58 @@ public class UIManager : MonoBehaviour
 
     public void HandleRegistration()
     {
-        // TODO: Save Character selection and name, transition to map view
+        // Preparing UserInfo object to send to server registration route
+        UserInfo userInfo = new UserInfo
+        {
+            gid = loader.GetComponent<GameManager>().gid,
+            displayName = characterName,
+            avatar = characterType,
+            addSuccessful = false
+        };
+
+        // Storing name and char type into game manager
         Debug.Log(string.Format("REGISTRATION: Character Name: {0}, Character Type: {1}", characterName, characterType));
+        loader.GetComponent<GameManager>().displayName = characterName;
         loader.GetComponent<GameManager>().charType = characterType;
-        SceneManager.LoadScene(1);
+        // Starting Coroutine to make network call for registering user
+        StartCoroutine(AddUser(userInfo));
     }
+
+    IEnumerator AddUser(UserInfo userInfo)
+    {
+        string jsonToSend = JsonUtility.ToJson(userInfo);
+        UnityWebRequest request = UnityWebRequest.Post("https://test-or-mathgo.wn.r.appspot.com/user/registration", jsonToSend);
+        //UnityWebRequest request = UnityWebRequest.Post("http://mathgo-46d6d.wl.r.appspot.com/user/registration", jsonToSend);
+
+
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("Accept", "application/json");
+        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonToSend));
+        yield return request.SendWebRequest();
+        var response = request.downloadHandler.text;
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            UserInfo responseUserInfo = JsonUtility.FromJson<UserInfo>(response);
+
+            if (!responseUserInfo.addSuccessful)
+            {
+                // TODO Handle unsuccessful login
+                Debug.Log("Unable to Add New User");
+            }
+            else
+            {
+                Debug.Log("POST successful! User Added");
+                SceneManager.LoadScene(1);
+            }
+        }
+
+    }
+
 
     public void TogglePlayerSelectCharacters(bool flag)
     {

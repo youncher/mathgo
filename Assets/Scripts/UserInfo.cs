@@ -9,4 +9,5 @@ public class UserInfo
     public string displayName;
     public string idToken;
     public bool loginSuccessful;
+    public bool addSuccessful;
 }

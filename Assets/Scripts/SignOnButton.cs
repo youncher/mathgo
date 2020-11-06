@@ -71,7 +71,12 @@ public class SignOnButton : MonoBehaviour {
   IEnumerator CheckUserExists () {
     string jsonToSend = JsonUtility.ToJson (userInfo);
 
-    UnityWebRequest request = UnityWebRequest.Post ("http://mathgo-46d6d.wl.r.appspot.com/user/validation", jsonToSend);
+
+
+        UnityWebRequest request = UnityWebRequest.Post("https://test-or-mathgo.wn.r.appspot.com/user/validation", jsonToSend);
+
+
+        //UnityWebRequest request = UnityWebRequest.Post ("http://mathgo-46d6d.wl.r.appspot.com/user/validation", jsonToSend);
     request.SetRequestHeader ("Content-Type", "application/json");
     request.SetRequestHeader ("Accept", "application/json");
     request.uploadHandler = new UploadHandlerRaw (Encoding.UTF8.GetBytes (jsonToSend));
@@ -101,7 +106,9 @@ public class SignOnButton : MonoBehaviour {
 
       } else {
         AddStatusText ("New Math Go user!");
-        ChangeToNewCharacterScreen ();
+        loader.GetComponent<GameManager>().gid = userInfo.gid;
+
+        ChangeToNewCharacterScreen();
       }
     }
   }
