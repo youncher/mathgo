@@ -97,7 +97,7 @@ public class SignOnButton : MonoBehaviour {
       else if (userInfo.existingUser) {
         // Loading up user data into game manager, and loading new scene
         loader.GetComponent<GameManager> ().charType = userInfo.avatar;
-        SceneManager.LoadScene (1);
+        SceneManager.LoadScene (Constant.OverworldMap);
 
       } else {
         AddStatusText ("New Math Go user!");

@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: de88ecdd668dbc74fa7cef243129ff73
   - enabled: 1
     path: Assets/Scenes/CaptureScene.unity
-    guid: b2ae726525568fd40ac78c7ba0411c4c
+    guid: a747726873e3e4d43b485d2ae7c33506
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: d021c8070f2bc18439b154a1d5ac9dcd,
       type: 2}

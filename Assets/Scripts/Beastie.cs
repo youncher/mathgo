@@ -8,6 +8,6 @@ public class Beastie : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(Constant.CaptureScene);
     }
 }

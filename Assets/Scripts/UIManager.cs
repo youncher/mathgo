@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
         // TODO: Save Character selection and name, transition to map view
         Debug.Log(string.Format("REGISTRATION: Character Name: {0}, Character Type: {1}", characterName, characterType));
         loader.GetComponent<GameManager>().charType = characterType;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Constant.OverworldMap);
     }
 
     public void TogglePlayerSelectCharacters(bool flag)
