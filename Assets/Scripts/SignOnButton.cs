@@ -71,7 +71,7 @@ public class SignOnButton : MonoBehaviour {
   IEnumerator CheckUserExists () {
     string jsonToSend = JsonUtility.ToJson (userInfo);
 
-    UnityWebRequest request = UnityWebRequest.Post ("http://mathgo-46d6d.wl.r.appspot.com/user/validation", jsonToSend);
+    UnityWebRequest request = UnityWebRequest.Post ("https://test-or-mathgo.wn.r.appspot.com/user/validation", jsonToSend);
     request.SetRequestHeader ("Content-Type", "application/json");
     request.SetRequestHeader ("Accept", "application/json");
     request.uploadHandler = new UploadHandlerRaw (Encoding.UTF8.GetBytes (jsonToSend));
@@ -86,15 +86,8 @@ public class SignOnButton : MonoBehaviour {
       UserInfo responseUserInfo = JsonUtility.FromJson<UserInfo> (response);
       userInfo.avatar = responseUserInfo.avatar;
       userInfo.existingUser = responseUserInfo.existingUser;
-      userInfo.loginSuccessful = responseUserInfo.loginSuccessful;
 
-      if (!userInfo.loginSuccessful)
-      {
-        // TODO Handle unsuccessful login
-        Debug.Log ("Invalid login");
-        AddStatusText ("Login unsuccessful");
-      }
-      else if (userInfo.existingUser) {
+      if (userInfo.existingUser) {
         // Loading up user data into game manager, and loading new scene
         loader.GetComponent<GameManager> ().charType = userInfo.avatar;
         SceneManager.LoadScene (1);

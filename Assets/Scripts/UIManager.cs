@@ -100,7 +100,6 @@ public class UIManager : MonoBehaviour
             gid = loader.GetComponent<GameManager>().gid,
             displayName = characterName,
             avatar = characterType,
-            addSuccessful = false
         };
 
         // Storing name and char type into game manager
@@ -114,7 +113,7 @@ public class UIManager : MonoBehaviour
     IEnumerator AddUser(UserInfo userInfo)
     {
         string jsonToSend = JsonUtility.ToJson(userInfo);
-        UnityWebRequest request = UnityWebRequest.Post("http://mathgo-46d6d.wl.r.appspot.com/user/registration", jsonToSend);
+        UnityWebRequest request = UnityWebRequest.Post("https://test-or-mathgo.wn.r.appspot.com/user/registration", jsonToSend);
 
 
         request.SetRequestHeader("Content-Type", "application/json");
@@ -129,20 +128,9 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            UserInfo responseUserInfo = JsonUtility.FromJson<UserInfo>(response);
-
-            if (!responseUserInfo.addSuccessful)
-            {
-                // TODO Handle unsuccessful login
-                Debug.Log("Unable to Add New User");
-            }
-            else
-            {
-                Debug.Log("POST successful! User Added");
-                SceneManager.LoadScene(1);
-            }
+            Debug.Log("POST successful! User Added");
+            SceneManager.LoadScene(1);
         }
-
     }
 
 
