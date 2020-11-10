@@ -1,1 +1,0 @@
-{"AccessToken":"put_key_here","MemoryCacheSize":500,"FileCacheSize":25000,"DefaultTimeout":30,"AutoRefreshCache":false}

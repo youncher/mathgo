@@ -106,8 +106,12 @@ public class UIManager : MonoBehaviour
         Debug.Log(string.Format("REGISTRATION: Character Name: {0}, Character Type: {1}", characterName, characterType));
         loader.GetComponent<GameManager>().displayName = characterName;
         loader.GetComponent<GameManager>().charType = characterType;
+<<<<<<< HEAD
         // Starting Coroutine to make network call for registering user
         StartCoroutine(AddUser(userInfo));
+=======
+        SceneManager.LoadScene(Constant.OverworldMap);
+>>>>>>> master
     }
 
     IEnumerator AddUser(UserInfo userInfo)
