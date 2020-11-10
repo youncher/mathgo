@@ -86,22 +86,17 @@ public class SignOnButton : MonoBehaviour {
       UserInfo responseUserInfo = JsonUtility.FromJson<UserInfo> (response);
       userInfo.avatar = responseUserInfo.avatar;
       userInfo.existingUser = responseUserInfo.existingUser;
-      userInfo.loginSuccessful = responseUserInfo.loginSuccessful;
 
-      if (!userInfo.loginSuccessful)
-      {
-        // TODO Handle unsuccessful login
-        Debug.Log ("Invalid login");
-        AddStatusText ("Login unsuccessful");
-      }
-      else if (userInfo.existingUser) {
+      if (userInfo.existingUser) {
         // Loading up user data into game manager, and loading new scene
         loader.GetComponent<GameManager> ().charType = userInfo.avatar;
         SceneManager.LoadScene (Constant.OverworldMap);
 
       } else {
         AddStatusText ("New Math Go user!");
-        ChangeToNewCharacterScreen ();
+        loader.GetComponent<GameManager>().gid = userInfo.gid;
+
+        ChangeToNewCharacterScreen();
       }
     }
   }

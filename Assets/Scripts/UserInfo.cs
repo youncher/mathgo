@@ -8,5 +8,4 @@ public class UserInfo
     public int avatar;
     public string displayName;
     public string idToken;
-    public bool loginSuccessful;
 }
