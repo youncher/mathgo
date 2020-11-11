@@ -72,5 +72,6 @@ crashlytics-build.properties
 
 # Other
 /Assets/Scripts/Keys.cs*
-/Assets/Resources/Mapbox/MapboxConfiguration.txt
+/Assets/Resources/Mapbox/MapboxConfiguration*
 /ProjectSettings/AndroidLogcatSettings.asset
+.vscode
