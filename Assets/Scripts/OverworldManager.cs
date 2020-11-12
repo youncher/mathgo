@@ -8,6 +8,7 @@ public class OverworldManager : MonoBehaviour
 {
     [SerializeField] private GameObject character1;
     [SerializeField] private GameObject character2;
+    [SerializeField] private Camera mainCamera;
     private GameManager gameManager;
     private GameObject player;
     private float MIN_RANGE = -5.0f;
@@ -41,6 +42,7 @@ public class OverworldManager : MonoBehaviour
         player.transform.parent = LBG.transform;
         // Slime model tiny - using this to increase size
         player.transform.localScale += new Vector3(3.0f, 3.0f, 3.0f);
+        mainCamera.transform.parent = player.transform;
     }
 
     private void PopulateMapWithBeasties()
