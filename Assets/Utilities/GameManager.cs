@@ -8,12 +8,47 @@ public class GameManager : Singleton<GameManager>
     public int beastiesSpawned = 5;
     public string displayName;
     public string gid;
-
-    public GameObject SelectedBeastie { get; set; }
+    [SerializeField] private List<Beastie> beasties = new List<Beastie>();
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void AddBeastie(Beastie beastie)
+    {
+        beasties.Add(beastie);
+    }
+
+    public void DisableUnselectedBeasties()
+    {
+        foreach (Beastie beastie in beasties)
+        {
+            if (!beastie.Selected)
+            {
+                beastie.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void EnableAllBeasties()
+    {
+        foreach (Beastie beastie in beasties)
+        {
+            beastie.gameObject.SetActive(true);
+        }
+    }
+
+    public Beastie GetSelectedBeastie()
+    {
+        foreach (Beastie beastie in beasties)
+        {
+            if (beastie.Selected)
+            {
+                return beastie;
+            }
+        }
+
+        return null;
+    }
 }

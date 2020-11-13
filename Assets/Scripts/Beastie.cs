@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Beastie : MonoBehaviour
 {
+    public bool Selected { get; set; } = false;
+
     private void Start()
     {
         DontDestroyOnLoad(this);
@@ -13,11 +15,8 @@ public class Beastie : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == Constant.OverworldMap)
         {
-            GameObject loader = GameObject.Find("Loader");
-            GameManager gameManager = loader.GetComponent<GameManager>();
-            gameManager.SelectedBeastie = this.gameObject;
+            this.Selected = true;
             SceneManager.LoadScene(Constant.CaptureScene);
-            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(Constant.CaptureScene));
         }
     }
 }
