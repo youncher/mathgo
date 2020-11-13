@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// TODO: Currently a placeholder to ensure only Beasties are created from Factory
 public class Beastie : MonoBehaviour
 {
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
     private void OnMouseDown()
     {
-        SceneManager.LoadScene(Constant.CaptureScene);
+        if (SceneManager.GetActiveScene().name == Constant.OverworldMap)
+        {
+            GameObject loader = GameObject.Find("Loader");
+            GameManager gameManager = loader.GetComponent<GameManager>();
+            gameManager.SelectedBeastie = this.gameObject;
+            SceneManager.LoadScene(Constant.CaptureScene);
+            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(Constant.CaptureScene));
+        }
     }
 }

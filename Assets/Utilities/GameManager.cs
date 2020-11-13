@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     public string displayName;
     public string gid;
 
+    public GameObject SelectedBeastie { get; set; }
 
     private void Awake()
     {
