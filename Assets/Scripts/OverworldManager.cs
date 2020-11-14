@@ -13,7 +13,7 @@ public class OverworldManager : MonoBehaviour
     private GameObject player;
     private float MIN_RANGE = -5.0f;
     private float MAX_RANGE = 50.0f;
-    // Start is called before the first frame update
+
     void Start()
     {
         GameObject loader = GameObject.Find("Loader");
@@ -22,7 +22,6 @@ public class OverworldManager : MonoBehaviour
         LoadCharacter();
         PopulateMapWithBeasties();
     }
-
 
     private void LoadCharacter()
     {
@@ -62,7 +61,7 @@ public class OverworldManager : MonoBehaviour
         float x = player.transform.position.x + GenerateRange();
         float y = player.transform.position.y;
         float z = player.transform.position.z + GenerateRange();
-        Instantiate(beastie, new Vector3(x, y, z), Quaternion.Euler(0.0f, UnityEngine.Random.Range(0.0f, 360.0f), 0.0f));
+        gameManager.AddBeastie(Instantiate(beastie, new Vector3(x, y, z), Quaternion.Euler(0.0f, UnityEngine.Random.Range(0.0f, 360.0f), 0.0f)));
     }
 
     private float GenerateRange()
