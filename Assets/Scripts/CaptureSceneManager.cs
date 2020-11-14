@@ -8,9 +8,8 @@ public class CaptureSceneManager : MonoBehaviour
     [SerializeField] private ARPlaneManager PlaneManager;
     [SerializeField] private Camera ARCamera;
     private GameManager gameManager;
-    private Beastie selectedBeastie;
+    private Beastie captureViewBeastie;
     private static CaptureSceneManager _instance;
-    private bool hasSpawnedBeastie { get; set; } = false;
 
     public static CaptureSceneManager Instance
     {
@@ -37,8 +36,7 @@ public class CaptureSceneManager : MonoBehaviour
     {
         GameObject loader = GameObject.Find("Loader");
         gameManager = loader.GetComponent<GameManager>();
-        gameManager.DisableUnselectedBeasties();
-        selectedBeastie = gameManager.GetSelectedBeastie();
+        gameManager.SetAllBeastiesActive(false);
 
         PlaneManager.planesChanged += PlaceBeastieOnPlane;
     }
@@ -50,22 +48,26 @@ public class CaptureSceneManager : MonoBehaviour
 
     private void PlaceBeastieOnPlane(ARPlanesChangedEventArgs obj)
     {
-        ARPlane plane = obj.added[0];
-
-        if (plane != null && !hasSpawnedBeastie)
+        if (captureViewBeastie == null && obj.added.Count > 0 && obj.added[0] != null)
         {
-            selectedBeastie.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-            selectedBeastie.transform.position = plane.transform.position;
-            hasSpawnedBeastie = true;
+            ARPlane plane = obj.added[0];
+            Beastie selectedBeastie = gameManager.GetSelectedBeastie();
+
+            captureViewBeastie = Instantiate(selectedBeastie, plane.transform.position, Quaternion.identity);
+            Debug.Log(selectedBeastie.Equals(captureViewBeastie));
+
+            captureViewBeastie.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            captureViewBeastie.transform.position = plane.transform.position;
+            captureViewBeastie.gameObject.SetActive(true);
         }
     }
 
 
     private void TurnBeastieTowardsCamera()
     {
-        if (hasSpawnedBeastie)
+        if (captureViewBeastie != null)
         {
-            selectedBeastie.transform.LookAt(ARCamera.transform);
+            captureViewBeastie.transform.LookAt(ARCamera.transform);
         }
     }
 }

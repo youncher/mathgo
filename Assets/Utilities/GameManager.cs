@@ -20,23 +20,9 @@ public class GameManager : Singleton<GameManager>
         beasties.Add(beastie);
     }
 
-    public void DisableUnselectedBeasties()
+    public void SetAllBeastiesActive(bool flag)
     {
-        foreach (Beastie beastie in beasties)
-        {
-            if (!beastie.Selected)
-            {
-                beastie.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    public void EnableAllBeasties()
-    {
-        foreach (Beastie beastie in beasties)
-        {
-            beastie.gameObject.SetActive(true);
-        }
+        beasties.ForEach(beastie => beastie.gameObject.SetActive(flag));
     }
 
     public Beastie GetSelectedBeastie()
