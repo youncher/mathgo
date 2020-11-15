@@ -1,18 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class GameManager : Singleton<GameManager>
 {
     public int charType;
-    public int beastiesSpawned = 5;
+    private int defaultBeastiesSpawnCount = 5;
     public string displayName;
     public string gid;
-    [SerializeField] private List<Beastie> beasties = new List<Beastie>();
-
+    private List<Beastie> beasties = new List<Beastie>();
+    private int selectedBeastieIndex { get; set; } = -1;
+    
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public int DefaultBeastiesSpawnCount
+    {
+        get => defaultBeastiesSpawnCount;
+    }
+
+    public int ExistingBeastiesCount
+    {
+        get => beasties.Count;
     }
 
     public void AddBeastie(Beastie beastie)
@@ -20,6 +29,12 @@ public class GameManager : Singleton<GameManager>
         beasties.Add(beastie);
     }
 
+    public Beastie GetBeastie(int index)
+    {
+        return beasties[index];
+
+    }
+    
     public void SetAllBeastiesActive(bool flag)
     {
         beasties.ForEach(beastie => beastie.gameObject.SetActive(flag));
@@ -27,14 +42,24 @@ public class GameManager : Singleton<GameManager>
 
     public Beastie GetSelectedBeastie()
     {
-        foreach (Beastie beastie in beasties)
+        for (int i = 0; i < beasties.Count; i++ )
         {
-            if (beastie.Selected)
+            if (beasties[i].Selected)
             {
-                return beastie;
+                selectedBeastieIndex = i;
+                return beasties[i];
             }
         }
 
         return null;
+    }
+
+    public void RemoveSelectedBeastie()
+    {
+        if (selectedBeastieIndex != -1)
+        {
+           beasties.RemoveAt(selectedBeastieIndex);
+           selectedBeastieIndex = -1;
+        }
     }
 }

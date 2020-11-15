@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charType: 0
-  beastiesSpawned: 5
+  beastiesSpawned: 0
   displayName: 
   gid: 
+  beasties: []
