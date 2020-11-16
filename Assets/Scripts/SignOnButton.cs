@@ -71,7 +71,7 @@ public class SignOnButton : MonoBehaviour {
   IEnumerator CheckUserExists () {
     string jsonToSend = JsonUtility.ToJson (userInfo);
 
-    UnityWebRequest request = UnityWebRequest.Post ("http://mathgo-46d6d.wl.r.appspot.com/user/validation", jsonToSend);
+    UnityWebRequest request = UnityWebRequest.Post (Constant.UserValidationUri, jsonToSend);
     request.SetRequestHeader ("Content-Type", "application/json");
     request.SetRequestHeader ("Accept", "application/json");
     request.uploadHandler = new UploadHandlerRaw (Encoding.UTF8.GetBytes (jsonToSend));

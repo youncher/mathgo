@@ -1,7 +1,4 @@
 ﻿using Mapbox.Examples;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OverworldManager : MonoBehaviour
@@ -13,7 +10,7 @@ public class OverworldManager : MonoBehaviour
     private GameObject player;
     private float MIN_RANGE = -5.0f;
     private float MAX_RANGE = 50.0f;
-
+    
     void Start()
     {
         GameObject loader = GameObject.Find("Loader");
@@ -46,29 +43,30 @@ public class OverworldManager : MonoBehaviour
 
     private void PopulateMapWithBeasties()
     {
-        int beastiesToSpawn = gameManager.beastiesSpawned;
-        for (int i = 0; i < beastiesToSpawn; i++)
+        if (gameManager.ExistingBeastiesCount == 0)
         {
-            InstantiateBeastie();
+            InstantiateNewBeasties();
         }
-
-        gameManager.beastiesSpawned -= beastiesToSpawn;
     }
 
-    private void InstantiateBeastie()
+    private void InstantiateNewBeasties()
     {
-        Beastie beastie = BeastieFactory.Instance.GenerateBeastie();
-        float x = player.transform.position.x + GenerateRange();
-        float y = player.transform.position.y;
-        float z = player.transform.position.z + GenerateRange();
-        gameManager.AddBeastie(Instantiate(beastie, new Vector3(x, y, z), Quaternion.Euler(0.0f, UnityEngine.Random.Range(0.0f, 360.0f), 0.0f)));
+        int beastiesToSpawn = gameManager.DefaultBeastiesSpawnCount;
+        for (int i = 0; i < beastiesToSpawn; i++)
+        {
+            Beastie beastie = BeastieFactory.Instance.GenerateBeastie();
+            float x = player.transform.position.x + GenerateRange();
+            float y = player.transform.position.y;
+            float z = player.transform.position.z + GenerateRange();
+            gameManager.AddBeastie(Instantiate(beastie, new Vector3(x, y, z), Quaternion.Euler(0.0f, UnityEngine.Random.Range(0.0f, 360.0f), 0.0f)));
+        }
     }
 
     private float GenerateRange()
     {
         // Reference: https://www.youtube.com/watch?v=S827tTi8OCo&list=PL86WBCjNmqh4bDQycScKKlP0ETkjo39gG
-        float randomNum = UnityEngine.Random.Range(MIN_RANGE, MAX_RANGE);
-        int direction = UnityEngine.Random.Range(0, 2) == 0 ? 1 : -1;
+        float randomNum = Random.Range(MIN_RANGE, MAX_RANGE);
+        int direction = Random.Range(0, 2) == 0 ? 1 : -1;
         return randomNum * direction;
     }
 }
