@@ -11,7 +11,7 @@ public class CaptureSceneManager : MonoBehaviour
     [SerializeField] private Canvas questionAnswerCanvas;
     [SerializeField] private Canvas warning;
 
-    private bool warningInactive = false;
+    private bool warningActive = true;
 
 
     [SerializeField] private ARPlaneManager PlaneManager;
@@ -93,9 +93,9 @@ public class CaptureSceneManager : MonoBehaviour
 
     void Update()
     {
-        if (captureViewBeastie != null && !warningInactive)
+        if (captureViewBeastie != null && warningActive)
         {
-            warningInactive = true;
+            warningActive = false;
             Destroy(warning.gameObject);
         }
         TurnBeastieTowardsCamera();
@@ -105,6 +105,7 @@ public class CaptureSceneManager : MonoBehaviour
             sceneTransitionDelay -= Time.deltaTime;
             if (sceneTransitionDelay <= 0)
             {
+                Destroy(captureViewBeastie.gameObject);
                 gameManager.SetAllBeastiesActive(true);
                 SceneManager.LoadScene(Constant.OverworldMap);
             }
@@ -214,7 +215,6 @@ public class CaptureSceneManager : MonoBehaviour
             correctStatusShadow.color = new Color32(100, 10, 10, 255);
             SetCorrectStatus("Incorrect");
         }
-        Destroy(captureViewBeastie.gameObject);
         DisableAnswerButtons();
     }
 
