@@ -8,6 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class CaptureSceneManager : MonoBehaviour
 {
+    [SerializeField] private Canvas questionAnswerCanvas;
+    [SerializeField] private Canvas warning;
+
+    private bool warningActive = true;
+
+
     [SerializeField] private ARPlaneManager PlaneManager;
     [SerializeField] private Camera ARCamera;
     private GameManager gameManager;
@@ -77,12 +83,21 @@ public class CaptureSceneManager : MonoBehaviour
 
         correctStatusFront = GameObject.Find("CorrectStatusTextFront").GetComponent<TextMeshProUGUI>();
         correctStatusShadow = GameObject.Find("CorrectStatusTextShadow").GetComponent<TextMeshProUGUI>();
-        
+
+        // after getting button references, we deactivate the canvas
+        questionAnswerCanvas.gameObject.SetActive(false);
+
         StartCoroutine(GetMathProblems());
+
     }
 
     void Update()
     {
+        if (captureViewBeastie != null && warningActive)
+        {
+            warningActive = false;
+            Destroy(warning.gameObject);
+        }
         TurnBeastieTowardsCamera();
         
         if (answerProvided == true)
@@ -90,10 +105,20 @@ public class CaptureSceneManager : MonoBehaviour
             sceneTransitionDelay -= Time.deltaTime;
             if (sceneTransitionDelay <= 0)
             {
+                Destroy(captureViewBeastie.gameObject);
                 gameManager.SetAllBeastiesActive(true);
                 SceneManager.LoadScene(Constant.OverworldMap);
             }
         }
+        if (captureViewBeastie != null && (beastieVisible(captureViewBeastie)))
+        {
+            questionAnswerCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            questionAnswerCanvas.gameObject.SetActive(false);
+        }
+
     }
 
     private void PlaceBeastieOnPlane(ARPlanesChangedEventArgs obj)
@@ -119,7 +144,23 @@ public class CaptureSceneManager : MonoBehaviour
             captureViewBeastie.transform.LookAt(ARCamera.transform);
         }
     }
-    
+
+
+    // reference: https://answers.unity.com/questions/8003/how-can-i-know-if-a-gameobject-is-seen-by-a-partic.html
+    private bool beastieVisible(Beastie beast)
+    {
+
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(ARCamera);
+        if (GeometryUtility.TestPlanesAABB(planes, beast.GetComponent<Collider>().bounds))
+            return true;
+        else
+            return false;
+    }
+
+
+
+
+
     IEnumerator GetMathProblems()
     {
         UnityWebRequest request = UnityWebRequest.Get(Constant.MathProblemsUri);
