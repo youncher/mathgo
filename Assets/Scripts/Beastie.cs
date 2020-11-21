@@ -15,7 +15,10 @@ public class Beastie : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == Constant.OverworldMap)
         {
-            this.Selected = true;
+            GameObject loader = GameObject.Find("Loader");
+            GameManager gameManager = loader.GetComponent<GameManager>();
+            gameManager.SetSelectedBeastie(this);
+
             SceneManager.LoadScene(Constant.CaptureScene);
         }
     }

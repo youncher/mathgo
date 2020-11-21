@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     public string displayName;
     public string gid;
     private List<Beastie> beasties = new List<Beastie>();
+    private Beastie selectedBeastie;
     private int selectedBeastieIndex { get; set; } = -1;
     
     private void Awake()
@@ -42,24 +43,19 @@ public class GameManager : Singleton<GameManager>
 
     public Beastie GetSelectedBeastie()
     {
-        for (int i = 0; i < beasties.Count; i++ )
-        {
-            if (beasties[i].Selected)
-            {
-                selectedBeastieIndex = i;
-                return beasties[i];
-            }
-        }
+        return selectedBeastie;
+    }
 
-        return null;
+    public void SetSelectedBeastie(Beastie beastie)
+    {
+        selectedBeastie = beastie;
     }
 
     public void RemoveSelectedBeastie()
     {
-        if (selectedBeastieIndex != -1)
+        if (selectedBeastie != null)
         {
-           beasties.RemoveAt(selectedBeastieIndex);
-           selectedBeastieIndex = -1;
+            beasties.Remove(selectedBeastie);
         }
     }
 }
