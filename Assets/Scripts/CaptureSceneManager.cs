@@ -214,6 +214,7 @@ public class CaptureSceneManager : MonoBehaviour
             correctStatusFront.color = new Color32(240, 8, 8, 255);
             correctStatusShadow.color = new Color32(100, 10, 10, 255);
             SetCorrectStatus("Incorrect");
+            gameManager.SetSelectedBeastie(null);
         }
         DisableAnswerButtons();
     }
