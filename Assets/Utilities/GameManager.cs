@@ -8,7 +8,6 @@ public class GameManager : Singleton<GameManager>
     public string gid;
     private List<Beastie> beasties = new List<Beastie>();
     private Beastie selectedBeastie;
-    private int selectedBeastieIndex { get; set; } = -1;
     
     private void Awake()
     {
@@ -30,12 +29,6 @@ public class GameManager : Singleton<GameManager>
         beasties.Add(beastie);
     }
 
-    public Beastie GetBeastie(int index)
-    {
-        return beasties[index];
-
-    }
-    
     public void SetAllBeastiesActive(bool flag)
     {
         beasties.ForEach(beastie => beastie.gameObject.SetActive(flag));
