@@ -13,7 +13,6 @@ public class CaptureSceneManager : MonoBehaviour
 
     private bool warningActive = true;
 
-
     [SerializeField] private ARPlaneManager PlaneManager;
     [SerializeField] private Camera ARCamera;
     private GameManager gameManager;
@@ -38,7 +37,7 @@ public class CaptureSceneManager : MonoBehaviour
     private TextMeshProUGUI correctStatusFront;
     private TextMeshProUGUI correctStatusShadow;
 
-    private bool answerProvided = false;
+    private bool answerProvided;
 
     private static CaptureSceneManager _instance;
 
@@ -88,7 +87,6 @@ public class CaptureSceneManager : MonoBehaviour
         questionAnswerCanvas.gameObject.SetActive(false);
 
         StartCoroutine(GetMathProblems());
-
     }
 
     void Update()
@@ -100,7 +98,7 @@ public class CaptureSceneManager : MonoBehaviour
         }
         TurnBeastieTowardsCamera();
         
-        if (answerProvided == true)
+        if (answerProvided)
         {
             sceneTransitionDelay -= Time.deltaTime;
             if (sceneTransitionDelay <= 0)
@@ -110,6 +108,7 @@ public class CaptureSceneManager : MonoBehaviour
                 SceneManager.LoadScene(Constant.OverworldMap);
             }
         }
+        
         if (captureViewBeastie != null && (beastieVisible(captureViewBeastie)))
         {
             questionAnswerCanvas.gameObject.SetActive(true);
@@ -118,7 +117,6 @@ public class CaptureSceneManager : MonoBehaviour
         {
             questionAnswerCanvas.gameObject.SetActive(false);
         }
-
     }
 
     private void PlaceBeastieOnPlane(ARPlanesChangedEventArgs obj)
@@ -145,21 +143,14 @@ public class CaptureSceneManager : MonoBehaviour
         }
     }
 
-
     // reference: https://answers.unity.com/questions/8003/how-can-i-know-if-a-gameobject-is-seen-by-a-partic.html
     private bool beastieVisible(Beastie beast)
     {
-
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(ARCamera);
         if (GeometryUtility.TestPlanesAABB(planes, beast.GetComponent<Collider>().bounds))
             return true;
-        else
-            return false;
+        return false;
     }
-
-
-
-
 
     IEnumerator GetMathProblems()
     {
