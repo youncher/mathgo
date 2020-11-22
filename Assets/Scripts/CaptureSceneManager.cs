@@ -16,6 +16,9 @@ public class CaptureSceneManager : MonoBehaviour
     [SerializeField] private ARPlaneManager PlaneManager;
     [SerializeField] private Camera ARCamera;
     private GameManager gameManager;
+    private AudioSource captureSceneAudio;
+    public AudioClip correctSound;
+    public AudioClip incorrectSound;
     private Beastie captureViewBeastie;
     
     private float sceneTransitionDelay = 1.5f;
@@ -63,6 +66,7 @@ public class CaptureSceneManager : MonoBehaviour
     {
         GameObject loader = GameObject.Find("Loader");
         gameManager = loader.GetComponent<GameManager>();
+        captureSceneAudio = GetComponent<AudioSource>();
         gameManager.SetAllBeastiesActive(false);
 
         PlaneManager.planesChanged += PlaceBeastieOnPlane;
@@ -103,9 +107,7 @@ public class CaptureSceneManager : MonoBehaviour
             sceneTransitionDelay -= Time.deltaTime;
             if (sceneTransitionDelay <= 0)
             {
-                Destroy(captureViewBeastie.gameObject);
-                gameManager.SetAllBeastiesActive(true);
-                SceneManager.LoadScene(Constant.OverworldMap);
+                GoToMapScene();
             }
         }
         
@@ -119,6 +121,21 @@ public class CaptureSceneManager : MonoBehaviour
         }
     }
 
+    public void GoToMapScene()
+    {
+        CaptureSceneCleanup();
+        SceneManager.LoadScene(Constant.OverworldMap);
+    }
+    
+    private void CaptureSceneCleanup()
+    {
+        if (captureViewBeastie != null)
+        {
+            Destroy(captureViewBeastie.gameObject);
+        }
+        gameManager.SetAllBeastiesActive(true);
+    }
+    
     private void PlaceBeastieOnPlane(ARPlanesChangedEventArgs obj)
     {
         if (captureViewBeastie == null && obj.added.Count > 0 && obj.added[0] != null)
@@ -195,6 +212,7 @@ public class CaptureSceneManager : MonoBehaviour
         answerProvided = true;
         if (buttonId == mathProblem.CorrectIndex)
         {
+            captureSceneAudio.PlayOneShot(correctSound, 1.0f);
             correctStatusFront.color = new Color32(33, 255, 0, 255);
             correctStatusShadow.color = new Color32(60, 70, 59, 255);
             SetCorrectStatus("Correct");
@@ -202,6 +220,7 @@ public class CaptureSceneManager : MonoBehaviour
         }
         else
         {
+            captureSceneAudio.PlayOneShot(incorrectSound, 2.0f);
             correctStatusFront.color = new Color32(240, 8, 8, 255);
             correctStatusShadow.color = new Color32(100, 10, 10, 255);
             SetCorrectStatus("Incorrect");

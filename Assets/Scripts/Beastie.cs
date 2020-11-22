@@ -7,6 +7,7 @@ public class Beastie : MonoBehaviour
     {
         DontDestroyOnLoad(this);
     }
+    
     private void OnMouseDown()
     {
         if (SceneManager.GetActiveScene().name == Constant.OverworldMap)
