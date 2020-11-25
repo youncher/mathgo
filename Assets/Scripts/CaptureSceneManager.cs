@@ -133,6 +133,7 @@ public class CaptureSceneManager : MonoBehaviour
         {
             Destroy(captureViewBeastie.gameObject);
         }
+        gameManager.SetSelectedBeastie(null);
         gameManager.SetAllBeastiesActive(true);
     }
     
