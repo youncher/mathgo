@@ -14,7 +14,6 @@ public class SignOnButton : MonoBehaviour {
   public Canvas SignOnCanvas;
   public Canvas NewCharacterCanvas;
 
-  private Text debugSignOnStatusText;
   private string webClientId = Keys.GetWebClientId ();
   private GoogleSignInConfiguration configuration;
   private UserInfo userInfo;
@@ -26,15 +25,10 @@ public class SignOnButton : MonoBehaviour {
     };
   }
 
-  void Start () {
-    debugSignOnStatusText = GameObject.Find ("DebugSignOnStatusText").GetComponent<Text> ();
-  }
-
   public void OnSignIn () {
     GoogleSignIn.Configuration = configuration;
     GoogleSignIn.Configuration.UseGameSignIn = false;
     GoogleSignIn.Configuration.RequestIdToken = true;
-    AddStatusText ("Calling SignIn");
 
     GoogleSignIn.DefaultInstance.SignIn ().ContinueWith (
       OnAuthenticationFinished);
@@ -47,13 +41,13 @@ public class SignOnButton : MonoBehaviour {
         if (enumerator.MoveNext ()) {
           GoogleSignIn.SignInException error =
             (GoogleSignIn.SignInException) enumerator.Current;
-          AddStatusText ("Got Error: " + error.Status + " " + error.Message);
+          Debug.Log("Got Error: " + error.Status + " " + error.Message);
         } else {
-          AddStatusText ("Got Unexpected Exception?!?" + task.Exception);
+          Debug.Log("Got Unexpected Exception?!?" + task.Exception);
         }
       }
     } else if (task.IsCanceled) {
-      AddStatusText ("Canceled");
+       Debug.Log("Canceled");
     } else { // Google auth success
       userInfo = new UserInfo
       {
@@ -93,7 +87,7 @@ public class SignOnButton : MonoBehaviour {
         SceneManager.LoadScene (Constant.OverworldMap);
 
       } else {
-        AddStatusText ("New Math Go user!");
+        Debug.Log("New Math Go user!");
         loader.GetComponent<GameManager>().gid = userInfo.gid;
 
         ChangeToNewCharacterScreen();
@@ -106,18 +100,5 @@ public class SignOnButton : MonoBehaviour {
 
     SignOnCanvas.enabled = false;
     NewCharacterCanvas.enabled = true;
-  }
-
-  private List<string> messages = new List<string> ();
-  void AddStatusText (string text) {
-    if (messages.Count == 5) {
-      messages.RemoveAt (0);
-    }
-    messages.Add (text);
-    string txt = "";
-    foreach (string s in messages) {
-      txt += "\n" + s;
-    }
-    debugSignOnStatusText.text = txt;
   }
 }
