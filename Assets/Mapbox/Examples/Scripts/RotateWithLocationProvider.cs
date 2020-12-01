@@ -10,7 +10,7 @@ namespace Mapbox.Examples
 		/// </summary>
 		[SerializeField]
 		[Tooltip("Per default 'UserHeading' (direction the device is moving) is used for rotation. Check to use 'DeviceOrientation' (where the device is facing)")]
-		bool _useDeviceOrientation;
+		bool _useDeviceOrientation = true;
 
 		/// <summary>
 		/// 
@@ -24,7 +24,7 @@ namespace Mapbox.Examples
 		/// </summary>
 		[SerializeField]
 		[Tooltip("The rate at which the transform's rotation tries catch up to the provided heading. ")]
-		float _rotationFollowFactor = 1;
+		float _rotationFollowFactor = 2;
 
 		/// <summary>
 		/// Set this to true if you'd like to adjust the rotation of a RectTransform (in a UI canvas) with the heading.
@@ -39,7 +39,7 @@ namespace Mapbox.Examples
 		/// </summary>
 		[SerializeField]
 		[Tooltip("Set this to true if you'd like to adjust the sign of the rotation angle. eg angle passed in 63.5, angle that should be used for rotation: -63.5.")]
-		bool _useNegativeAngle;
+		bool _useNegativeAngle = true;
 
 		/// <summary>
 		/// Use a mock <see cref="T:Mapbox.Unity.Location.TransformLocationProvider"/>,
