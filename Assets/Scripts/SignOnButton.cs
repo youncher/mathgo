@@ -6,7 +6,6 @@ using Google;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SignOnButton : MonoBehaviour {
   [SerializeField] private GameObject loader;
