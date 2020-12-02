@@ -8,7 +8,7 @@ public class Gestures : MonoBehaviour
     [SerializeField, Range(0, 3)] private float rotationRate = 0.4f;
     [SerializeField] GameObject compassImage;
     [SerializeField] GameObject textWarning;
-    private bool firstWarning = true;
+    private bool IsFirstWarning = true;
     private Vector3 camRotation;
     private Vector3 camPosition;
     public float perspectiveZoomSpeed = .5f;
@@ -36,10 +36,10 @@ public class Gestures : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Moved)
             {
-                if (firstWarning)
+                if (IsFirstWarning)
                 {
                     textWarning.gameObject.SetActive(true);
-                    firstWarning = false;
+                    IsFirstWarning = false;
                     Destroy(textWarning.gameObject, 5.0f);
                 }
                 // Saving the camera transform when player uses gesture while application is using deice orientation
