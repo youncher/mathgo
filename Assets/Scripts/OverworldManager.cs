@@ -8,7 +8,7 @@ public class OverworldManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     private GameManager gameManager;
     private GameObject player;
-    private float MIN_RANGE = -5.0f;
+    private float MIN_RANGE = 5.0f;
     private float MAX_RANGE = 50.0f;
     
     void Start()
@@ -36,6 +36,8 @@ public class OverworldManager : MonoBehaviour
         player.AddComponent(typeof(ImmediatePositionWithLocationProvider));
         player.AddComponent(typeof(RotateWithLocationProvider));
         player.transform.parent = LBG.transform;
+        // set a tag for the user's player character
+        player.tag = "UserCharacter";
         // Slime model tiny - using this to increase size
         player.transform.localScale += new Vector3(3.0f, 3.0f, 3.0f);
         mainCamera.transform.parent = player.transform;
