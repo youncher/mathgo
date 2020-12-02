@@ -41,6 +41,14 @@ public class OverworldManager : MonoBehaviour
         // Slime model tiny - using this to increase size
         player.transform.localScale += new Vector3(3.0f, 3.0f, 3.0f);
         mainCamera.transform.parent = player.transform;
+
+        TMPro.TMP_Text avatarNameField = GameObject.Find("AvatarName").GetComponent<TMPro.TMP_Text>();
+        string displayName = gameManager.displayName;
+
+        if (displayName != null)
+        {
+            avatarNameField.SetText(gameManager.displayName);
+        }
     }
 
     private void PopulateMapWithBeasties()
