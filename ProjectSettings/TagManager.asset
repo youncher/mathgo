@@ -9,6 +9,7 @@ TagManager:
   - PlayerSelectCharacters
   - DebugSignOnStatusText
   - UserCharacter
+  - AvatarName
   layers:
   - Default
   - TransparentFX

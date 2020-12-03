@@ -82,7 +82,10 @@ public class SignOnButton : MonoBehaviour {
 
       if (userInfo.existingUser) {
         // Loading up user data into game manager, and loading new scene
-        loader.GetComponent<GameManager> ().charType = userInfo.avatar;
+        GameManager gameManager = loader.GetComponent<GameManager>();
+        gameManager.charType = userInfo.avatar;
+        gameManager.displayName = responseUserInfo.displayName;
+
         SceneManager.LoadScene (Constant.OverworldMap);
 
       } else {
